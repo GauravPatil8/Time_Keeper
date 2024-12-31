@@ -15,8 +15,10 @@ def register():
     start_time = None
     bpy.utils.register_class(TimerProperties)
     bpy.types.Scene.timer_props = bpy.props.PointerProperty(type=TimerProperties)
-    bpy.utils.register_class(StartTimerOperator)
+    bpy.types.VIEW3D_HT_header.append(draw_timer_header)
     bpy.utils.register_class(StopTimerOperator)
+    bpy.utils.register_class(StartTimerOperator)
+    bpy.utils.register_class(createProject)
     bpy.utils.register_class(TimerPanel)
 
 def unregister():
@@ -26,6 +28,8 @@ def unregister():
     del bpy.types.Scene.timer_props
     bpy.utils.unregister_class(StartTimerOperator)
     bpy.utils.unregister_class(StopTimerOperator)
+    bpy.utils.unregister_class(createProject)
     bpy.utils.unregister_class(TimerPanel)
+    bpy.types.VIEW3D_HT_header.remove(draw_timer_header)
 
 register()
